@@ -26,7 +26,7 @@
 
 
 pipeline {
-    agent any   // Run on any available Jenkins agent
+    agent any    
 
     stages {
         stage('Build') {  
@@ -41,9 +41,8 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {
-            steps {
-                // Check if the file exists using a Windows command
+        stage('Test') {  
+            steps { 
                 bat '''
                 if exist build\\index.html (
                     echo File exists
