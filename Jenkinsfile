@@ -41,16 +41,23 @@ pipeline {
                 '''
             }
         }
-        stage('test'){
-            bat '''
-            test -f build/index.html
-            npm test 
-            '''
-            
+        stage('Test') {
+            steps {
+                // Check if the file exists using a Windows command
+                bat '''
+                if exist build\\index.html (
+                    echo File exists
+                ) else (
+                    echo File does not exist
+                    exit /b 1
+                )
+                npm test 
+                '''
+            }
         }
     }
-    post{
-        always{
+    post {
+        always {
             junit 'test-result/junit.xml'
         }
     }
