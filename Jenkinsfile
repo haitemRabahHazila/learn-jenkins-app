@@ -25,6 +25,44 @@
 // }
 
 
+// pipeline {
+//     agent any    
+
+//     stages {
+//         stage('Build') {  
+//             steps {
+//                 bat '''
+//                 dir
+//                 node --version
+//                 npm --version
+//                 npm ci
+//                 npm run build
+//                 dir
+//                 '''
+//             }
+//         }
+//         stage('Test') {  
+//             steps { 
+//                 bat '''
+//                 if exist build\\index.html (
+//                     echo File exists
+//                 ) else (
+//                     echo File does not exist
+//                     exit /b 1
+//                 )
+//                 npm test 
+//                 '''
+//             }
+//         }
+//     }
+//     post {
+//         always {
+//             junit 'test-result/junit.xml'
+//         }
+//     }
+// }
+
+
 pipeline {
     agent any    
 
@@ -41,8 +79,8 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {  
-            steps { 
+        stage('Test') {
+            steps {
                 bat '''
                 if exist build\\index.html (
                     echo File exists
@@ -57,7 +95,7 @@ pipeline {
     }
     post {
         always {
-            junit 'test-result/junit.xml'
+            junit 'test-results/junit.xml' 
         }
     }
 }
