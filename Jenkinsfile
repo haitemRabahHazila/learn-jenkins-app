@@ -41,5 +41,17 @@ pipeline {
                 '''
             }
         }
+        stage('test'){
+            bat '''
+            test -f build/index.html
+            npm test 
+            '''
+            
+        }
+    }
+    post{
+        always{
+            junit 'test-result/junit.xml'
+        }
     }
 }
